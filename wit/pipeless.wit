@@ -1,0 +1,28 @@
+package pipeless:hooks;
+
+interface types {
+  record frame {
+    uuid: string,
+    original: list<list<list<u8>>>,
+    modified: list<list<list<u8>>>,
+    width: u32,
+    height: u32,
+    pts: u64,
+    dts: u64,
+    duration: u64,
+    fps: u8,
+    input-timestamp: float64,
+    inference-input: list<list<list<u8>>>,
+    inference-output: list<list<list<u8>>>,
+    pipeline-id: string,
+  }
+
+  record context {
+    to-change: string,
+  }
+}
+
+world hook {
+    use types.{frame, context};
+    export hook: func(f: frame, c: context) -> string;
+}
